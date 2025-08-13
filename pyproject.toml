@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "llm-minima"
+dynamic = ["version"]
+description = "A Small LLM Prototype"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.13"
+authors = [
+    { name = "Jan F. Kraemer", email = "jan.kraemer@hu-berlin.de" },
+]
+dependencies = [
+    "torch",
+    "torchvision",
+    "nicegui>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["check-manifest"]
+test = ["coverage"]
+
+
+[project.scripts]
+rag-ui = "llm_minima.main:main"
+
+[project.urls]
+Homepage = "https://github.com/camelusminimus/llm-minima"
+
+[tool.hatch.version]
+path = "llm_minima/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "llm_minima",
+]
+
+[tool.hatch.build.targets.wheel]
+include = [
+    "llm_minima",
+]
+
+[tool.hatch.envs.default]
+type = "virtual"
+path = ".venv"
+dependencies = [
+    "torch@https://download.pytorch.org/whl/rocm6.4",
+    "torchvision@https://download.pytorch.org/whl/rocm6.4",
+]
